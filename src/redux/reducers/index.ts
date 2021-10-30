@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 
 // reducers
-// import { navbar as navbarReducer } from './navbar';
+import { auth as authReducer } from './auth';
 
-export default combineReducers({
-  // navbar: navbarReducer,
+export const rootReducer = combineReducers({
+   auth: authReducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>
