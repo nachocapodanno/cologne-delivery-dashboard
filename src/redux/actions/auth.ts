@@ -28,13 +28,6 @@ export const signIn = (params: any) => {
   };
 }
 
-export const signInReloaded = (user: any) => {
-  return {
-    type: actionTypes.SIGN_IN_RELOADED,
-    value: user,
-  };
-}
-
 export const signOut = () => {
   authService.logout();
   return { type: actionTypes.SIGN_OUT_REQUEST };

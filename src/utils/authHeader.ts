@@ -1,6 +1,6 @@
 import SessionManager from './sessionManager';
 
-export function authHeader() {
+export const authHeader = () => {
     // return authorization header with jwt token
     let user = SessionManager.getSession();
 

@@ -17,7 +17,7 @@ const login = (username:any, password:any) => {
         });
 }
 
- const logout = () => {
+ export const logout = () => {
     SessionManager.destroySession();
 }
 /*
@@ -67,8 +67,5 @@ const handleResponse = (response:any) => {
 const authService = {
     login,
     logout,
-    /* getAll,
-    getById,
-    update, */
 };
 export default authService;

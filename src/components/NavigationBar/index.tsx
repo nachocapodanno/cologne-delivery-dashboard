@@ -1,32 +1,25 @@
-import { Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import * as actions from "../../redux/actions/parcel";
+import { useDispatch } from 'react-redux';
 
 const NavigationBar = () => {
+  const dispatch = useDispatch();
+  const handleShow = () => dispatch(actions.handleShow());
+
   return (
     <>
       <Navbar bg="light" expand="lg">
-        <Container>
+        <Container fluid>
           <Navbar.Brand href="#home">Cologne Delivery</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Button className='d-xs-none' size="sm" variant="primary" onClick={handleShow}>
+            New Parcel
+          </Button>
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">Home</Nav.Link>
+            <Nav className="ms-auto">
               <Nav.Link href="/login">Log Out</Nav.Link>
-              <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
