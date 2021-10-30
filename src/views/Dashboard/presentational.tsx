@@ -11,6 +11,7 @@ import DashboardRow from "../../components/DashboardRow";
 import ParcelForm from "../../components/ParcelForm";
 import * as actions from "../../redux/actions/parcel";
 import { RootState } from "../../redux/reducers";
+import SessionManager from "../../utils/sessionManager";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const Dashboard = () => {
   const show = useSelector((state: RootState) => state.parcel.showCreateForm);
 
   useEffect(() => {
-    dispatch(actions.findAll());
+    const id = SessionManager.getSession()?.id
+    dispatch(actions.findAllBySenderId(id));
   }, []);
 
   const handleShow = () => dispatch(actions.handleShow());
@@ -68,6 +70,10 @@ const Dashboard = () => {
                   })}
               </tbody>
             </Table>
+            {parcels && parcels.length === 0 && 
+            <div className="container py-5"><div className="alert alert-secondary mt-sm-5 ms-sm-5" role="alert">
+            No parcels loaded yet.
+          </div>  </div>}
           </Col>
         </Row>
       </Container>

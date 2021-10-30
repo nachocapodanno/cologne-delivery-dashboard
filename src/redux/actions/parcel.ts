@@ -1,7 +1,7 @@
 import * as actionTypes from "../types/parcel";
 import parcelService from "../../services/parcel";
 
-export const findAll = () => {
+export const findAllBySenderId = (id: any) => {
   const request = () => {
     return { type: actionTypes.FIND_ALL_PARCEL_REQUEST };
   };
@@ -15,7 +15,7 @@ export const findAll = () => {
   return (dispatch: any) => {
     dispatch(request());
 
-    parcelService.findAll().then(
+    parcelService.findAllBySenderId(id).then(
       (data: any) => {
         dispatch(success(data));
       },

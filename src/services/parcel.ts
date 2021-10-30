@@ -5,12 +5,12 @@ import { history } from "../utils/history";
 const apiUrl = process.env.REACT_APP_COLOGNE_DELIVERY_API;
 const contentType = { 'Content-Type': 'application/json' };
 
-const findAll = () => {
+const findAllBySenderId = (id: any) => {
     const requestOptions = {
         method: 'GET',
         headers: authHeader() as Headers
     };
-    return fetch(`${apiUrl}/parcel`, requestOptions).then(handleResponse);
+    return fetch(`${apiUrl}/parcel/sender/${id}`, requestOptions).then(handleResponse);
 }
 
 const create = (params:any) => {
@@ -38,7 +38,7 @@ const handleResponse = (response:any) => {
     });
 }
 const parcelService = {
-    findAll,
+    findAllBySenderId,
     create
 };
 export default parcelService;
