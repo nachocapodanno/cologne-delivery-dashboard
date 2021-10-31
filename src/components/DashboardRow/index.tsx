@@ -20,7 +20,7 @@ const DashboardRow = ({ item }: any) => {
       <td>{item.pickupTime ? moment(item.pickupTime).format('lll') : '-'}</td>
       <td>{item.deliveryAddress}</td>
       <td>{item.deliveryTime ? moment(item.deliveryTime).format('lll') : '-'}</td>
-      <td>{item.biker?.username}</td>
+      <td>{item.biker ? item.biker.username : '-'}</td>
     </tr>
   );
 };
