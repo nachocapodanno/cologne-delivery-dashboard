@@ -73,7 +73,6 @@ const Dashboard = () => {
                   <th>Pickup Time</th>
                   <th>Delivery Address</th>
                   <th>Delivery Time</th>
-                  <th>Sender</th>
                   <th>Biker</th>
                 </tr>
               </thead>

@@ -20,34 +20,6 @@ const login = (username:any, password:any) => {
  export const logout = () => {
     SessionManager.destroySession();
 }
-/*
-function getAll() {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
-}
-
-function getById(id:any) {
-    const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
-    };
-
-    return fetch(`${config.apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function update(user:any) {
-    const requestOptions = {
-        method: 'PUT',
-        headers: { ...authHeader(), 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-    };
-
-    return fetch(`${config.apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
-}*/
 
 const handleResponse = (response:any) => {
     return response.text().then((text:any) => {
