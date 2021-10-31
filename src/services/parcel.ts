@@ -19,8 +19,16 @@ const create = (params:any) => {
         headers: {...authHeader() as Headers, ...contentType},
         body: JSON.stringify({ ...params.params })
     };
-    console.log(JSON.stringify({ ...params.params }));
     return fetch(`${apiUrl}/parcel`, requestOptions).then(handleResponse);
+}
+
+const update = (params:any) => {
+    const requestOptions = {
+        method: 'PATCH',
+        headers: {...authHeader() as Headers, ...contentType},
+        body: JSON.stringify({ ...params.params })
+    };
+    return fetch(`${apiUrl}/parcel/${params.params.id}`, requestOptions).then(handleResponse);
 }
 
 const handleResponse = (response:any) => {
@@ -39,6 +47,7 @@ const handleResponse = (response:any) => {
 }
 const parcelService = {
     findAllBySenderId,
-    create
+    create,
+    update
 };
 export default parcelService;

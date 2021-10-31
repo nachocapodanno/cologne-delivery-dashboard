@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import DashboardRow from "../../components/DashboardRow";
+import ParcelEditForm from "../../components/ParcelEditForm";
 import ParcelForm from "../../components/ParcelForm";
 import * as actions from "../../redux/actions/parcel";
 import { RootState } from "../../redux/reducers";
@@ -17,14 +18,16 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state: RootState) => state.auth.isLoading);
   const parcels = useSelector((state: RootState) => state.parcel.parcels);
-  const show = useSelector((state: RootState) => state.parcel.showCreateForm);
+  const showSideContainer = useSelector((state: RootState) => state.parcel.showSideContainer);
+  const showEditForm = useSelector((state: RootState) => state.parcel.showEditStatus);
+  const editDataForm = useSelector((state: RootState) => state.parcel.editData);
 
   useEffect(() => {
     const id = SessionManager.getSession()?.id
     dispatch(actions.findAllBySenderId(id));
   }, []);
 
-  const handleShow = () => dispatch(actions.handleShow());
+  const hideSideContainer = () => dispatch(actions.hideSideContainer());
 
   const handleSubmit = (
     pickupAddress: any,
@@ -38,6 +41,17 @@ const Dashboard = () => {
         deliveryAddress,
         weight,
         description,
+      })
+    );
+  };
+
+  const handleUpdate = (
+    status: any,
+  ) => {
+    dispatch(
+      actions.update({
+        status,
+        id: editDataForm.id,
       })
     );
   };
@@ -78,8 +92,8 @@ const Dashboard = () => {
         </Row>
       </Container>
       <Offcanvas
-        show={show}
-        onHide={handleShow}
+        show={showSideContainer}
+        onHide={hideSideContainer}
         placement={"bottom"}
         style={{ height: "35vh" }}
       >
@@ -87,7 +101,7 @@ const Dashboard = () => {
           <Offcanvas.Title>New Parcel</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <ParcelForm action={handleSubmit} />
+          {showEditForm ?  <ParcelEditForm action={handleUpdate} status={editDataForm.status} /> :  <ParcelForm action={handleSubmit} /> }
         </Offcanvas.Body>
       </Offcanvas>
     </>

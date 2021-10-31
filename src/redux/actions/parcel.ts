@@ -26,8 +26,16 @@ export const findAllBySenderId = (id: any) => {
   };
 }
 
-export const handleShow = () => {
-  return { type: actionTypes.HANDLE_SHOW };
+export const handleCreate = () => {
+  return { type: actionTypes.SHOW_CREATE_FORM };
+}
+
+export const handleEdit = (data: any) => {
+  return { type: actionTypes.SHOW_EDIT_FORM, data };
+}
+
+export const hideSideContainer = () => {
+  return { type: actionTypes.HIDE_SIDE_CONTAINER };
 }
 
 export const create = (params: any) => {
@@ -47,7 +55,33 @@ export const create = (params: any) => {
     parcelService.create({params}).then(
       (data: any) => {
         dispatch(success(data));
-        dispatch(handleShow());
+        dispatch(hideSideContainer());
+      },
+      (error: any) => {
+        dispatch(failure(error.toString()));
+      }
+    );
+  };
+}
+
+export const update = (params: any) => {
+  const request = (data: any) => {
+    return { type: actionTypes.UPDATE_PARCEL_REQUEST, data };
+  };
+  const success = (data: any) => {
+    return { type: actionTypes.UPDATE_PARCEL_REQUEST_SUCCESS, data };
+  };
+  const failure = (error: any) => {
+    return { type: actionTypes.UPDATE_PARCEL_REQUEST_FAIL, error };
+  };
+
+  return (dispatch: any) => {
+    dispatch(request({ params }));
+    
+    parcelService.update({params}).then(
+      (data: any) => {
+        dispatch(success(data));
+        dispatch(hideSideContainer());
       },
       (error: any) => {
         dispatch(failure(error.toString()));
