@@ -17,9 +17,9 @@ const DashboardRow = ({ item }: any) => {
       <td>{item.weight} KG</td>
       <td>{parcelStatus[item.status]}</td>
       <td>{item.pickupAddress}</td>
-      <td>{moment(item.pickupTime).format('lll')}</td>
+      <td>{item.pickupTime ? moment(item.pickupTime).format('lll') : '-'}</td>
       <td>{item.deliveryAddress}</td>
-      <td>{moment(item.deliveryTime).format('lll')}</td>
+      <td>{item.deliveryTime ? moment(item.deliveryTime).format('lll') : '-'}</td>
       <td>{item.biker?.username}</td>
     </tr>
   );
